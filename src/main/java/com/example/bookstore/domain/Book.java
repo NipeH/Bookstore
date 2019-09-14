@@ -1,36 +1,48 @@
 package com.example.bookstore.domain;
 
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 //title, author, year, isbn, price
+@Entity
 public class Book {
 
-    private String model;
-    private String author;
+    @Id
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String model, author, isbn;
     private int year;
-    private int isbn;
     private double price;
+
+
 
 
     public Book(){
 
-        super();
-        this.model = null;
-        this.author = null;
-        this.year = 0;
-        this.isbn = 0;
-        this.price = 0;
 
     }
 
 
-    public Book(String model, String author, int year, int isbn, double price) {
+    public Book(String model, String author, int year, String isbn, double price) {
         super();
+
         this.model = model;
         this.author = author;
         this.year = year;
         this.isbn = isbn;
         this.price = price;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getModel() {
@@ -57,11 +69,11 @@ public class Book {
         this.year = year;
     }
 
-    public int getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
@@ -76,6 +88,7 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
+               // "id='"+id+ '\'' +
                 "model='" + model + '\'' +
                 ", author='" + author + '\'' +
                 ", year=" + year +
