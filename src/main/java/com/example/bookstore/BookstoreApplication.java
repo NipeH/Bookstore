@@ -2,6 +2,8 @@ package com.example.bookstore;
 
 import com.example.bookstore.domain.Book;
 import com.example.bookstore.domain.BookRepository;
+import com.example.bookstore.domain.Category;
+import com.example.bookstore.domain.CategoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -23,14 +25,24 @@ public class BookstoreApplication {
 
 
     @Bean
-    public CommandLineRunner bookstoreDemo(BookRepository bookRepository){
+    public CommandLineRunner bookstoreDemo(BookRepository bookRepository, CategoryRepository crepository){
         return args -> {
 
             //title, author, year, isbn, price-->
-            //public Book(Long id,String model, String author, int year, int isbn, double price) {
+            //public Book(Long id,String model, String author, int year, String isbn, double price) {
             log.info("save books");
-            bookRepository.save(new Book("Sinuhe Egyptiläinen", "Mika Waltari", 1952, "0001", 43.90));
-            bookRepository.save(new Book("Horna", "Ilkka Remes", 2014, "0002", 55.50));
+
+            crepository.save(new Category("Drama"));
+
+            crepository.save(new Category("Thriller"));
+
+
+
+
+
+
+            bookRepository.save(new Book("Sinuhe Egyptiläinen", "Mika Waltari", 1952, "0001", 43.90, crepository.findByName("Drama").get(0)));
+            bookRepository.save(new Book("Horna", "Ilkka Remes", 2014, "0002", 55.50, crepository.findByName("Thriller").get(0)));
 
             log.info("fetch all books");
             for (Book book : bookRepository.findAll()){
