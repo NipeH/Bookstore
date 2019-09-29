@@ -1,5 +1,7 @@
 package com.example.bookstore.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,6 +27,7 @@ public class Book {
 
     //category
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "categoryid")
     private Category category;
 
@@ -104,7 +107,7 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-               // "id='"+id+ '\'' +
+               "id='"+id+ '\'' +
                 "model='" + model + '\'' +
                 ", author='" + author + '\'' +
                 ", year=" + year +

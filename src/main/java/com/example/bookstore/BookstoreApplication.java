@@ -17,12 +17,9 @@ public class BookstoreApplication {
 
     private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
 
-
     public static void main(String[] args) {
         SpringApplication.run(BookstoreApplication.class, args);
     }
-
-
 
     @Bean
     public CommandLineRunner bookstoreDemo(BookRepository bookRepository, CategoryRepository crepository){
@@ -33,13 +30,12 @@ public class BookstoreApplication {
             log.info("save books");
 
             crepository.save(new Category("Drama"));
-
             crepository.save(new Category("Thriller"));
-
-
-
-
-
+            crepository.save(new Category("Scifi"));
+            crepository.save(new Category("Learning"));
+            crepository.save(new Category("Kids"));
+            crepository.save(new Category("Comics"));
+            crepository.save(new Category("Other"));
 
             bookRepository.save(new Book("Sinuhe Egyptiläinen", "Mika Waltari", 1952, "0001", 43.90, crepository.findByName("Drama").get(0)));
             bookRepository.save(new Book("Horna", "Ilkka Remes", 2014, "0002", 55.50, crepository.findByName("Thriller").get(0)));

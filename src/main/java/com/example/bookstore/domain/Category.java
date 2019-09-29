@@ -51,12 +51,14 @@ public class Category {
         this.books = books;
     }
 
+
+    // kirjoita käsin uusiksi !!!!!
     @Override
     public String toString() {
         return "Category{" +
                 "categoryid=" + categoryid +
                 ", name='" + name + '\'' +
-                ", books=" + books +
+               // ", books=" + books +
                 '}';
     }
 }
