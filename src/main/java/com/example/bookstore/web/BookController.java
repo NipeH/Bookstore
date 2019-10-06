@@ -6,6 +6,7 @@ import com.example.bookstore.domain.Book;
 import com.example.bookstore.domain.BookRepository;
 import com.example.bookstore.domain.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -33,6 +34,13 @@ public class BookController {
     private CategoryRepository crepository;
 
 
+    //kirjautuminen / login
+
+    @RequestMapping(value="/login")
+    public String login(){
+        return "login";
+    }
+
 
 
     //kirjojen listaaminen
@@ -58,6 +66,16 @@ public class BookController {
 
     }
 
+    //ADMIN
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @RequestMapping(value = "/add")
+    public String addStudent(Model model){
+        model.addAttribute("book", new Book());
+        model.addAttribute("categories", crepository.findAll());
+        return "addbook";
+    }
+
+
 
 
     //tyhjän kirjalomakkeen muodostaminen
@@ -65,7 +83,6 @@ public class BookController {
     public String getBookForm(Model model) {
         model.addAttribute("book", new Book()); // tekee tyhjän Kirja-olion
         model.addAttribute("categories", crepository.findAll());
-
         return "bookform";
 
     }
